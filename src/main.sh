@@ -6,8 +6,8 @@ source "$PROJECT_HOME/src/github_actions.sh"
 source "$PROJECT_HOME/src/misc.sh"
 
 main() {
-#  ensure::env_variable_exist "GITHUB_REPOSITORY"
-#  ensure::env_variable_exist "GITHUB_EVENT_PATH"
+  ensure::env_variable_exist "GITHUB_REPOSITORY"
+  ensure::env_variable_exist "GITHUB_EVENT_PATH"
   ensure::total_args 1 "$@"
 
   export GITHUB_TOKEN="$1"

@@ -10,6 +10,12 @@ github::get_commit_modified_files() {
 #  local -r last_commit=$(curl -sSL -H "Authorization: token $GITHUB_TOKEN" -H "$GITHUB_API_HEADER" "$GITHUB_API_URI/repos/$GITHUB_REPOSITORY/pulls/$pr_number/commits" | jq .files | jq -r ".[] | .filename")
 }
 
+github::get_file_details() {
+  local -r file=$1
+
+  curl -sSL -H "Authorization: token $GITHUB_TOKEN" -H "$GITHUB_API_HEADER" "$GITHUB_API_URI/repos/$GITHUB_REPOSITORY/contents/$file"
+}
+
 github::comment_pr() {
   local -r comment=$2
   local -r pr_number=$1

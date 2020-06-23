@@ -16,8 +16,7 @@ main() {
 
   local -r commited_files=$(github::get_commit_modified_files "$commit_sha")
 
-  echo "ESTA ES JAVI"
-  echo "$commited_files"
+  echo "$commited_files" | xargs github::get_file_details
 
   exit $?
 }

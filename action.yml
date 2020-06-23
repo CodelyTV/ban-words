@@ -7,9 +7,6 @@ inputs:
   GITHUB_TOKEN:
     description: 'GitHub token'
     required: true
-  another_input:
-    description: 'A demo argument'
-    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'

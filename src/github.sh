@@ -13,7 +13,7 @@ github::get_commit_modified_files() {
 github::get_file_details() {
   local -r file=$1
 
-  curl -sSL -H "Authorization: token $GITHUB_TOKEN" -H "$GITHUB_API_HEADER" "$GITHUB_API_URI/repos/$GITHUB_REPOSITORY/contents/$file"
+  curl -sSL -H "Authorization: token $GITHUB_TOKEN" -H "$GITHUB_API_HEADER" "$GITHUB_API_URI/repos/$GITHUB_REPOSITORY/contents/$file" | jq '.content' | base64 -d
 }
 
 github::comment_pr() {

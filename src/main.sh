@@ -8,9 +8,17 @@ source "$PROJECT_HOME/src/misc.sh"
 main() {
   ensure::env_variable_exist "GITHUB_REPOSITORY"
   ensure::env_variable_exist "GITHUB_EVENT_PATH"
-  ensure::total_args 2 "$@"
+  ensure::total_args 1 "$@"
 
   export GITHUB_TOKEN="$1"
+
+  local -r commit_sha="$(github_actions::commit_sha)"
+
+  local -r commited_files=$(github::get_commit_modified_files "$commit_sha")
+
+  echo "$commited_files" | xargs github::get_file_details | grep "blacklist"
+
+
 
   exit $?
 }

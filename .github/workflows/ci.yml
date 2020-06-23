@@ -11,4 +11,3 @@ jobs:
       - uses: ./
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          another_input: "whatever"

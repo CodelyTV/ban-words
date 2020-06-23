@@ -16,7 +16,9 @@ main() {
 
   local -r commited_files=$(github::get_commit_modified_files "$commit_sha")
 
-  echo "$commited_files" | xargs github::get_file_details
+  echo "$commited_files" | xargs github::get_file_details | grep "blacklist"
+
+
 
   exit $?
 }

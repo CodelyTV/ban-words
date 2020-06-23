@@ -12,5 +12,11 @@ main() {
 
   export GITHUB_TOKEN="$1"
 
+  local -r commit_sha="$(github_actions::commit_sha)"
+
+  local -r commited_files=$(github::get_commit_modified_files "$commit_sha")
+
+  echo "$commited_files"
+
   exit $?
 }

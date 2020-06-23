@@ -7,13 +7,15 @@ github::get_commit_modified_files() {
   local -r commit_ref=$1
 
   curl -sSL -H "Authorization: token $GITHUB_TOKEN" -H "$GITHUB_API_HEADER" "$GITHUB_API_URI/repos/$GITHUB_REPOSITORY/commits/$commit_ref" | jq .files | jq -r ".[] | .filename"
-#  local -r last_commit=$(curl -sSL -H "Authorization: token $GITHUB_TOKEN" -H "$GITHUB_API_HEADER" "$GITHUB_API_URI/repos/$GITHUB_REPOSITORY/pulls/$pr_number/commits" | jq .files | jq -r ".[] | .filename")
+  #  local -r last_commit=$(curl -sSL -H "Authorization: token $GITHUB_TOKEN" -H "$GITHUB_API_HEADER" "$GITHUB_API_URI/repos/$GITHUB_REPOSITORY/pulls/$pr_number/commits" | jq .files | jq -r ".[] | .filename")
 }
 
 github::get_file_details() {
   local -r file=$1
 
-  curl -sSL -H "Authorization: token $GITHUB_TOKEN" -H "$GITHUB_API_HEADER" "$GITHUB_API_URI/repos/$GITHUB_REPOSITORY/contents/$file" | jq '.content' | base64 -d
+  local -r encoded_file=$(curl -sSL -H "Authorization: token $GITHUB_TOKEN" -H "$GITHUB_API_HEADER" "$GITHUB_API_URI/repos/$GITHUB_REPOSITORY/contents/$file" | jq '.content' | sed 's/"//g')
+
+  echo "$encoded_file" | base64 -d
 }
 
 github::comment_pr() {

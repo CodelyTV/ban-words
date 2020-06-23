@@ -12,5 +12,4 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.GITHUB_TOKEN }}
-    - ${{ inputs.another_input }}
 

@@ -1,0 +1,19 @@
+name: 'The name of your action'
+description: 'The description of the action'
+branding:
+  icon: 'alert-circle'
+  color: 'gray-dark'
+inputs:
+  GITHUB_TOKEN:
+    description: 'GitHub token'
+    required: true
+  another_input:
+    description: 'A demo argument'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.GITHUB_TOKEN }}
+    - ${{ inputs.another_input }}
+

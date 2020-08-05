@@ -13,7 +13,7 @@ github::get_commit_modified_files() {
 github::get_file_details() {
   local -r file=$1
 
-  local -r encoded_file=$(curl -sSL -H "Authorization: token $GITHUB_TOKEN" -H "$GITHUB_API_HEADER" "$GITHUB_API_URI/repos/$GITHUB_REPOSITORY/contents/$file" | jq '.content' | sed 's/"//g')
+  local -r encoded_file=$(curl -sSL -H "Authorization: token $GITHUB_TOKEN" -H "$GITHUB_API_HEADER" "$GITHUB_API_URI/repos/$GITHUB_REPOSITORY/contents/$file" | jq -r '.content')
 
   echo "$encoded_file" | base64 -d
 }
